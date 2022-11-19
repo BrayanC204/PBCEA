@@ -195,7 +195,7 @@ export default class Registro extends Component {
             </View>
             <View>
                 <TextInput
-                 placeholder='Email'
+                 placeholder='Correo Electronico'
                  keyboardType='email-address'
                  autoCapitalize='none'
                  onChangeText={(val) => {

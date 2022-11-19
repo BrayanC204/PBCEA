@@ -8,6 +8,7 @@ import Detalle from './src/screens/Detalle_planta/Detalle_planta';
 import Favoritos from './src/screens/Favoritos/Favoritos';
 import Principal from './src/screens/Principal/Principal';
 import Registro from './src/screens/Registro/Registro';
+import Options from './src/screens/Options/Options';
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,12 @@ export default function App() {
           } } }
             name= 'Registro'
             component={Registro} />
+            <Stack.Screen
+          options = {{ headerStyle: {
+            backgroundColor: '#ffffff'
+          } } }
+            name= 'Options'
+            component={Options} />
       </Stack.Navigator>
     </NavigationContainer>
   );

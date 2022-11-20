@@ -13,11 +13,12 @@ const Principal = (props) =>{
     return(
         <ScrollView>
             <Text style={{
-	                    color:"#ff0000", 
+	                    backgroundColor:'#FF3434',
 	                    marginTop:10, 
 						marginBottom: 10,
-						borderColor: '#C20000',
+						borderColor: '#FF3434',
 						borderWidth:2,
+                        borderRadius:20,
 						marginHorizontal: 80,
 	                    textAlign: 'center',
                         fontSize: 15}}
@@ -47,6 +48,7 @@ const styles= StyleSheet.create({
     imageStyl: {
     flexGrow:1,
     width:"100%",
+    opacity:0.8,
     height:200,
     alignItems: 'center',
     justifyContent:'center',

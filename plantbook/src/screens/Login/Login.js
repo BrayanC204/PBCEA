@@ -7,6 +7,7 @@ import {
     Span,
     TouchableOpacity,
     Alert,
+    StyleSheet
 } from 'react-native';
 import firebase from '../../database/firebase';
 import getError from '../../helpers/errores_es_mx';
@@ -77,20 +78,21 @@ const Login = (props) =>{
         }
     }
     return(
-        <View>
+        <View style={styles.container}>
             <View>
                 <Image
                     source={require('../../../assets/logo.png')}
                     />
             </View>
 
-            <View>
+            <View style={{marginTop:20, fontSize:30, fontWeight:'bold', fontSize:50,}}>
                 <Text>Iniciar Sesion</Text>
             </View>
 
-            <View>
+            <View style={styles.view2}>
                 <Text>E-mail</Text>
                 <TextInput
+                    style={styles.view}
                     placeholder='Correo Electronico'
                     keyboardType='email-address'
                     maxLength={50}
@@ -101,9 +103,10 @@ const Login = (props) =>{
                     />
             </View>
 
-            <View>
+            <View style={styles.view2}>
                 <Text>Contraseña</Text>
                 <TextInput
+                    style={styles.view}
                     placeholder='Contraseña'
                     keyboardType='default'
                     maxLength={20}
@@ -116,31 +119,32 @@ const Login = (props) =>{
 
             <View
                 style={{
-                    display: btnVisible ? 'flex' : 'none'
+                    display: btnVisible ? 'flex' : 'none', marginTop:40
                     }}
                     >
                 <Text
+                    style={{ alignSelf:'center', textAlign:'center', borderRadius:20, borderColor:'green', borderWidth:1, width:90, height:20 ,backgroundColor:'#35DB28'}}
                     onPress={validaLogin}>
-                        Iniciar Sesion
+                        Ingresar
                 </Text>
             </View>
 
-            <View>
-                <Text>¿No tienes una cuenta? Registrate Aqui</Text>
+            <View style={{marginTop:40, alignItems:'center'}}>
+                <Text>¿No tienes una cuenta?</Text>
                 <TouchableOpacity 
                     onPress={() => {props.navigation.navigate('Registro')
                     }}>
-                    <Text>
-                        Registrate
+                    <Text style={{color:'#0024D5'}}>
+                        Registrate Aqui
                     </Text>
                 </TouchableOpacity>
             </View>
 
             <View>
-            <TouchableOpacity 
+            <TouchableOpacity style={{marginTop:40}}
                     onPress={() => {props.navigation.navigate('Contacto')
                     }}>
-                    <Text>
+                    <Text style={{color:'35DB28'}}>
                         Contactanos
                     </Text>
                 </TouchableOpacity>
@@ -148,5 +152,24 @@ const Login = (props) =>{
         </View>
     )
 }
+
+const styles= StyleSheet.create({
+
+    container:{
+    top:40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    },
+    view:{
+        borderColor: '#000000', 
+        borderWidth:1, 
+        borderRadius:10, 
+        textAlign:'center',
+        width:250,
+    },
+    view2:{
+        marginTop:20,
+    }
+});
 
 export default Login;

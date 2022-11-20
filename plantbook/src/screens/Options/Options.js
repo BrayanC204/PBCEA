@@ -49,7 +49,7 @@ const styles= StyleSheet.create({
     flexGrow:1,
     width:"100%",
     height:200,
-    opacity:0.4,
+    opacity:0.5,
     alignItems: 'center',
     justifyContent:'center',
     borderColor:'#35DB28',

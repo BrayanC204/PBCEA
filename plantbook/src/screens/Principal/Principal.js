@@ -11,10 +11,7 @@ import {
 } from 'react-native';
 import firebase from '../../database/firebase';
 import Options from '../Options/Options';
-<<<<<<< HEAD
 import Detalle from '../Detalle_planta/Detalle_planta';
-=======
->>>>>>> 4d3b29489105d8b3de16d1f7e1153aec900fa820
 
 const Principal = (props) =>{
     const [plantas, setPlantas] = useState([]);
@@ -48,7 +45,6 @@ const Principal = (props) =>{
                     <View>
                         {
                             Object.values(plantas).map((val) =>
-<<<<<<< HEAD
                             <View style={styles.container2}>
                             <Image source={{uri: val.imagen_url}} style={styles.imageStyl2}/>
                             <Text style={styles.userStyle2}>{val.nombre}</Text>
@@ -67,9 +63,6 @@ const Principal = (props) =>{
                             }}
 		            > Ver + </Text>
                             </View>
-=======
-                            <Image source={{uri: val.imagen_url}} style={styles.imageStyl}/>
->>>>>>> 4d3b29489105d8b3de16d1f7e1153aec900fa820
                             )
                         }
                     </View>
@@ -116,7 +109,6 @@ const styles= StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
     marginBottom: 4,
-<<<<<<< HEAD
   },
   imageStyl2: {
     flexGrow:1,
@@ -126,8 +118,6 @@ const styles= StyleSheet.create({
     justifyContent:'center',
     marginTop:10,
     marginBottom: 4,
-=======
->>>>>>> 4d3b29489105d8b3de16d1f7e1153aec900fa820
   },
     userStyle:{
         position:'absolute',

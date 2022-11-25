@@ -63,11 +63,7 @@ const styles= StyleSheet.create({
 
     container:{
     position:'relative',
-<<<<<<< HEAD
     top: 1, 
-=======
-    top: 5, 
->>>>>>> 4d3b29489105d8b3de16d1f7e1153aec900fa820
     left: 0, 
     right: 0, 
     bottom: 0,

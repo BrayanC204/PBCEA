@@ -42,13 +42,8 @@ const styles= StyleSheet.create({
     imageStyl: {
     flexGrow:1,
     width:"100%",
-<<<<<<< HEAD
     height:320,
     opacity:0.4,
-=======
-    height:200,
-    opacity:0.5,
->>>>>>> 4d3b29489105d8b3de16d1f7e1153aec900fa820
     alignItems: 'center',
     justifyContent:'center',
     borderColor:'#35DB28',

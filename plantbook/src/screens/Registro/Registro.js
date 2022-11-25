@@ -7,6 +7,7 @@ import {
     Image,
     TextInput,
     ActivityIndicator,
+    StyleSheet
 } from 'react-native';
 import firebase from '../../database/firebase';
 
@@ -147,18 +148,18 @@ export default class Registro extends Component {
         }
 
     return(
-        <ScrollView>
-            <View>
-                <Image
-                    source={require('../../../assets/logo.png')}
-                    />
-            </View>
-            <View>
-                <Text>Registrate</Text>
+        <View>
+            <View style={styles.container}>
+                        <Image source={require('../../../assets/plantasfondo.jpg')} style={styles.imageStyl}  />
+                        <Text style={styles.userStyle} onPress={() => {props.navigation.navigate(Favoritos);}} >
+                            Registrate aqui </Text>
+                    </View>
+            <View style={{marginTop:40, alignSelf:'center', fontSize:30}}>
                 <Text>Llena este formulario para registrarte</Text>
             </View>
             <View>
                 <TextInput
+                    style={{marginTop:30, alignSelf:'center', borderColor: '#000000', borderWidth:1, borderRadius:10, width:300, textAlign:'center'}}
                     placeholder='Nombre'
                     keyboardType='default'
                     onChangeText={(val) => {
@@ -171,6 +172,7 @@ export default class Registro extends Component {
             </View>
             <View>
                 <TextInput
+                    style={{marginTop:15, alignSelf:'center', borderColor: '#000000', borderWidth:1, borderRadius:10, width:300, textAlign:'center'}}
                     placeholder='Apellido Paterno'
                     keyboardType='default'
                     onChangeText={(val) => {
@@ -183,6 +185,7 @@ export default class Registro extends Component {
             </View>
             <View>
                 <TextInput
+                    style={{marginTop:15, alignSelf:'center', borderColor: '#000000', borderWidth:1, borderRadius:10, width:300, textAlign:'center'}}
                     placeholder='Apellido Materno'
                     keyboardType='default'
                     onChangeText={(val) => {
@@ -195,6 +198,7 @@ export default class Registro extends Component {
             </View>
             <View>
                 <TextInput
+                 style={{marginTop:15, alignSelf:'center', borderColor: '#000000', borderWidth:1, borderRadius:10, width:300, textAlign:'center'}}
                  placeholder='Email'
                  keyboardType='email-address'
                  autoCapitalize='none'
@@ -208,6 +212,7 @@ export default class Registro extends Component {
             </View>
             <View>
                 <TextInput
+                    style={{marginTop:15, alignSelf:'center', borderColor: '#000000', borderWidth:1, borderRadius:10, width:300, textAlign:'center'}}
                     placeholder='Contraseña (8 digitos)'
                     keyboardType='default'
                     secureTextEntry
@@ -222,6 +227,7 @@ export default class Registro extends Component {
             </View>
             <View>
                 <TextInput
+                    style={{marginTop:15, alignSelf:'center', borderColor: '#000000', borderWidth:1, borderRadius:10, width:300, textAlign:'center'}}
                     placeholder='Confirma tu contraseña'
                     keyboardType='default'
                     secureTextEntry
@@ -252,12 +258,57 @@ export default class Registro extends Component {
                 }}
             >
                 <Text
+                    style={{marginTop:30, alignSelf:'center', textAlign:'center', borderRadius:20, borderColor:'green', borderWidth:1, width:90, height:20 ,backgroundColor:'#35DB28'}}
                     onPress={validaRegistro}
                 >
                     Registrarme
                 </Text>
             </View>
-        </ScrollView>
+        </View>
     )
     }
 }
+
+const styles= StyleSheet.create({
+
+    container:{
+    position:'relative',
+    left: 0, 
+    right: 0, 
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    },
+    container2:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        },
+    imageStyl: {
+    flexGrow:1,
+    width:"100%",
+    height:200,
+    opacity:0.6,
+    alignItems: 'center',
+    justifyContent:'center',
+    borderColor:'#35DB28',
+  },
+    userStyle:{
+        position:'absolute',
+        fontSize:40,
+        color:'white',
+        fontWeight:'bold',
+        textAlign: 'center',
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    userStyle2:{
+        position:'absolute',
+        fontSize:30,
+        color:'red',
+        fontWeight:'bold',
+        textAlign: 'center',
+        alignItems:'center',
+        fontWeight:'bold',
+        justifyContent:'center',
+    },
+});

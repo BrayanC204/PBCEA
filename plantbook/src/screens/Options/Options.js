@@ -8,14 +8,25 @@ import {
 } from 'react-native';
 import Contacto from '../Contactanos/Contactanos';
 import Login from '../Login/Login';
-import Favoritos from '../Favoritos/Favoritos';
+import email from 'react-native-email'; 
+
+handleEmail = () => {
+    const to = ['plantbook@gmail.com', 'plantbook@gmail.com'] 
+    email(to, {
+        cc: ['plantbook@gmail.com', 'plantbook@gmail.com'], 
+        bcc: 'eliash5239@gmail.com', 
+        subject: 'Queja o sugerencia',
+        body: 'Escribe aqui lo que deseas comentarnos',
+        checkCanOpen: false 
+    }).catch(console.error)
+}
 
 const Options = (props) =>{
     return(
         <View>
                     <View style={styles.container}>
                         <Image source={require('../../../assets/contacto2.jpg')} style={styles.imageStyl}  />
-                        <Text style={styles.userStyle} onPress={() => {props.navigation.navigate(Contacto);}} >
+                        <Text style={styles.userStyle} onPress={this.handleEmail} >
                             Contacto</Text>
                     </View>
 

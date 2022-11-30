@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, Button, Alert, StyleSheet } from 'react-native';
+import email from 'react-native-email';    
 
-const validaCorreo = () =>
-    Alert.alert(
-      "Exito",
-      "Se ha enviado tu mensaje",
-      [
-        { text: "Aceptar", onPress: () => console.log("OK") }
-      ]
-    );
+    handleEmail = () => {
+        const to = ['eliash5239@gmail.com', 'eliash5239@gmail.com'] 
+        Alert.alert(
+            "Exito",
+            "Se ha enviado tu mensaje",
+            [
+              { text: "Aceptar", onPress: () => console.log("OK") }
+            ]
+          );// string or array of email addresses
+        email(to, {
+            // Optional additional arguments
+            cc: ['plantbook@gmail.com', 'plantbook@gmail.com.com'], // string or array of email addresses
+            bcc: 'plantbook@gmail.com', // string or array of email addresses
+            subject: 'Queja o sugerencia',
+            body: 'Some body right here',
+            checkCanOpen: false // Call Linking.canOpenURL prior to Linking.openURL
+        }).catch(console.error)
+    }
 
 const Contacto = (props) =>{
     return(     
@@ -53,7 +64,7 @@ const Contacto = (props) =>{
 	                    textAlign: 'center',
                         fontSize: 20,
 						borderRadius:20}}
-						onPress={validaCorreo}
+                        onPress={this.handleEmail}
 		            > Mandar mensaje </Text>
 			</View>
     )

@@ -41,6 +41,9 @@ const Principal = (props) =>{
                     }}>
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
+                                                <Text style={{fontSize:30, fontWeight:'bold', color:'red', elevation:2, padding:10}} onPress={() => {
+                                                    setModalVisible(!modalVisible)
+                                                }}> X </Text>
                                     <ScrollView>
                                         <Image source={{uri: imagen_url}} style={styles.imageStyl3}/>
                                         <Text style={{textAlign:'center', marginVertical:10, fontSize:35, fontWeight:'bold',}}> {nombre}</Text>
@@ -71,20 +74,22 @@ const Principal = (props) =>{
         }, [url]);
 
     return(
+        <View>
+        <Text style={{
+            backgroundColor:'#FF3434',
+            marginTop:5, 
+            marginBottom: 5,
+            borderColor: '#FF3434',
+            borderWidth:2,
+            borderRadius:20,
+            marginHorizontal: 100,
+            textAlign: 'center',
+            fontSize: 15}}
+            onPress={() => {props.navigation.navigate(Options);
+                }}
+        > Opciones </Text>
         <ScrollView>
-            <Text style={{
-	                    backgroundColor:'#FF3434',
-	                    marginTop:10, 
-						marginBottom: 5,
-						borderColor: '#FF3434',
-						borderWidth:2,
-                        borderRadius:20,
-						marginHorizontal: 100,
-	                    textAlign: 'center',
-                        fontSize: 15}}
-						onPress={() => {props.navigation.navigate(Options);
-                            }}
-		            > Opciones </Text>
+            
                     <View style={styles.container}>
                         <Image source={require('../../../assets/plantasfondo.jpg')} style={styles.imageStyl}  />
                         <Text style={styles.userStyle}>Aqui encontraras informacion sobre todas las plantas</Text>
@@ -120,6 +125,7 @@ const Principal = (props) =>{
                     </View>
                     {verModal(modalVisible)}
         </ScrollView>
+        </View>
     )
 }
 
@@ -127,7 +133,6 @@ const styles= StyleSheet.create({
 
     container:{
     position:'relative',
-    top: 10, 
     left: 0, 
     right: 0, 
     bottom: 0,
@@ -176,10 +181,11 @@ const styles= StyleSheet.create({
     flexGrow:1,
     width:"70%",
     height:150,
+    borderRadius:10,
     alignItems: 'center',
     justifyContent:'center',
     marginHorizontal:35,
-    marginTop:5,
+    marginTop:30,
     marginBottom: 10,
   },
     userStyle:{

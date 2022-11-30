@@ -87,7 +87,7 @@ const Principal = (props) =>{
             fontSize: 15}}
             onPress={() => {props.navigation.navigate(Options);
                 }}
-        > Opcion </Text>
+        > Opciones </Text>
                     <View style={styles.container}>
                         <Image source={require('../../../assets/plantasfondo.jpg')} style={styles.imageStyl}  />
                         <Text style={styles.userStyle}>Aqui encontraras informacion sobre todas las plantas</Text>

@@ -36,7 +36,7 @@ const Principal = (props) =>{
                     
                     visible={modalVisible}
                     onRequestClose={() => {
-                        Alert.alert("Modal cerrado");
+                        Alert.alert("Modal cerrado.");
                         setModalVisible(!modalVisible);
                     }}>
                         <View style={styles.centeredView}>

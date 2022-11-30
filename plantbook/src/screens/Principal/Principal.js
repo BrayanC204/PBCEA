@@ -74,7 +74,7 @@ const Principal = (props) =>{
         }, [url]);
 
     return(
-        <View>
+        <ScrollView>
         <Text style={{
             backgroundColor:'#FF3434',
             marginTop:5, 
@@ -87,9 +87,7 @@ const Principal = (props) =>{
             fontSize: 15}}
             onPress={() => {props.navigation.navigate(Options);
                 }}
-        > Opciones </Text>
-        <ScrollView>
-            
+        > Opcion </Text>
                     <View style={styles.container}>
                         <Image source={require('../../../assets/plantasfondo.jpg')} style={styles.imageStyl}  />
                         <Text style={styles.userStyle}>Aqui encontraras informacion sobre todas las plantas</Text>
@@ -125,7 +123,6 @@ const Principal = (props) =>{
                     </View>
                     {verModal(modalVisible)}
         </ScrollView>
-        </View>
     )
 }
 

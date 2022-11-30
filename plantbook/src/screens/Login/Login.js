@@ -12,6 +12,18 @@ import {
 import firebase from '../../database/firebase';
 import getError from '../../helpers/errores_es_mx';
 import LoginStyles from './Login.forms';
+import email from 'react-native-email'; 
+
+handleEmail = () => {
+    const to = ['plantbook@gmail.com', 'plantbook@gmail.com'] 
+    email(to, {
+        cc: ['plantbook@gmail.com', 'plantbook@gmail.com'], 
+        bcc: 'eliash5239@gmail.com', 
+        subject: 'Queja o sugerencia',
+        body: 'Escribe aqui lo que deseas comentarnos',
+        checkCanOpen: false 
+    }).catch(console.error)
+}
 
 const Login = (props) =>{
 
@@ -142,8 +154,7 @@ const Login = (props) =>{
 
             <View>
             <TouchableOpacity style={{marginTop:40}}
-                    onPress={() => {props.navigation.navigate('Contacto')
-                    }}>
+                    onPress={this.handleEmail}>
                     <Text style={{color:'35DB28'}}>
                         Contactanos
                     </Text>

@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import firebase from '../../database/firebase';
 import Options from '../Options/Options';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Principal = (props) =>{
     const [plantas, setPlantas] = useState([]);
@@ -32,25 +33,31 @@ const Principal = (props) =>{
                 <Modal
                     animationType='slide'
                     transparent={true}
+                    
                     visible={modalVisible}
                     onRequestClose={() => {
-                        Alert.alert("Modal has been closed.");
+                        Alert.alert("Modal cerrado");
                         setModalVisible(!modalVisible);
                     }}>
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
+                                                <Text style={{fontSize:30, fontWeight:'bold', color:'red', elevation:2, padding:10}} onPress={() => {
+                                                    setModalVisible(!modalVisible)
+                                                }}> X </Text>
                                     <ScrollView>
-                                        <Image source={{uri: imagen_url}} style={styles.imageStyl2}/>
-                                        <Text>Nombre: {nombre}</Text>
-                                        <Text>Nombre Cientifico: {nombre_cientifico}</Text>
-                                        <Text>Descripcion: {descripcion}</Text>
-                                        <Text>Clima: {clima}</Text>
-                                        </ScrollView>
+                                        <Image source={{uri: imagen_url}} style={styles.imageStyl3}/>
+                                        <Text style={{textAlign:'center', marginVertical:10, fontSize:35, fontWeight:'bold',}}> {nombre}</Text>
+                                        <Text style={{textAlign:'center', marginTop:5, fontWeight:'bold', fontSize:20,}}>{nombre_cientifico}</Text>
+                                        <Text style={{textAlign:'center', marginTop:30, fontWeight:'bold', fontSize:20,}}>Descripcion: </Text>
+                                        <Text style={{textAlign:'center', marginVertical:10, fontWeight:'bold', fontSize:20,}}> {descripcion}</Text>
+                                        <Text style={{textAlign:'center', marginTop:30, color:'#D17C00', fontWeight:'bold', fontSize:20, marginBottom:20}}>Clima: {clima}</Text>
+                                    </ScrollView>
                                             <Pressable
                                                 style={[styles.button, styles.buttonClose]}
                                                 onPress={() => {
                                                     setModalVisible(!modalVisible)
-                                                }}>
+                                                }}
+                                                >
                                                     <Text>Cerrar</Text>
                                             </Pressable>
                                         </View>
@@ -67,25 +74,27 @@ const Principal = (props) =>{
         }, [url]);
 
     return(
+        <View>
+        <Text style={{
+            backgroundColor:'#FF3434',
+            marginTop:5, 
+            marginBottom: 5,
+            borderColor: '#FF3434',
+            borderWidth:2,
+            borderRadius:20,
+            marginHorizontal: 100,
+            textAlign: 'center',
+            fontSize: 15}}
+            onPress={() => {props.navigation.navigate(Options);
+                }}
+        > Opciones </Text>
         <ScrollView>
-            <Text style={{
-	                    backgroundColor:'#FF3434',
-	                    marginTop:10, 
-						marginBottom: 10,
-						borderColor: '#FF3434',
-						borderWidth:2,
-                        borderRadius:20,
-						marginHorizontal: 80,
-	                    textAlign: 'center',
-                        fontSize: 15}}
-						onPress={() => {props.navigation.navigate(Options);
-                            }}
-		            > Opciones </Text>
+            
                     <View style={styles.container}>
                         <Image source={require('../../../assets/plantasfondo.jpg')} style={styles.imageStyl}  />
                         <Text style={styles.userStyle}>Aqui encontraras informacion sobre todas las plantas</Text>
                     </View>
-                    <View>
+                    <View style={{marginBottom:20}}>
                         {
                             Object.values(plantas).map((val) =>
                             <View style={styles.container2}>
@@ -116,6 +125,7 @@ const Principal = (props) =>{
                     </View>
                     {verModal(modalVisible)}
         </ScrollView>
+        </View>
     )
 }
 
@@ -123,7 +133,6 @@ const styles= StyleSheet.create({
 
     container:{
     position:'relative',
-    top: 10, 
     left: 0, 
     right: 0, 
     bottom: 0,
@@ -131,8 +140,8 @@ const styles= StyleSheet.create({
     justifyContent: 'center',
     },
     container2:{
-        marginTop: 25, 
-        marginHorizontal: 60,
+        marginTop: 20, 
+        marginHorizontal: 25,
         backgroundColor:'#CBCBCB',
         borderWidth:1,
         borderRadius:20,
@@ -161,17 +170,31 @@ const styles= StyleSheet.create({
   imageStyl2: {
     flexGrow:1,
     width:"60%",
-    height:100,
+    height:110,
+    borderRadius:10,
     alignItems: 'center',
     justifyContent:'center',
     marginTop:10,
     marginBottom: 4,
+  },
+  imageStyl3: {
+    flexGrow:1,
+    width:"70%",
+    height:150,
+    borderRadius:10,
+    alignItems: 'center',
+    justifyContent:'center',
+    marginHorizontal:35,
+    marginTop:30,
+    marginBottom: 10,
   },
     userStyle:{
         position:'absolute',
         fontSize:18,
         color:'white',
         fontWeight:'bold',
+        textShadowColor:'black',
+        textShadowOffset: {width: 20, height: 20},
         textAlign: 'center',
         alignItems:'center',
         justifyContent:'center',
@@ -192,11 +215,13 @@ const styles= StyleSheet.create({
       },
       modalView: {
         margin: 20,
-        backgroundColor: "white",
+        backgroundColor: "#BEFFB6",
         borderRadius: 30,
         padding: 40,
         alignItems: 'baseline',
-        shadowColor: "#000",
+        borderColor:'#22A701',
+        borderWidth:1,
+        shadowColor: "#22A701",
         shadowOffset: {
           width: 0,
           height: 2

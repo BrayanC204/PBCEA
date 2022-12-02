@@ -1,7 +1,11 @@
+//Importacion de las librerias para la pantalla contactanos
 import React, { useState } from 'react';
+//Importacion de los componentes de react para la pantalla
 import { View, Text, TextInput, Image, Button, Alert, StyleSheet } from 'react-native';
+//Importacion de la libreria para usar el servicio de email
 import email from 'react-native-email';    
 
+    //Creamos la funcion para enviar el correo al soporte
     handleEmail = () => {
         const to = ['eliash5239@gmail.com', 'eliash5239@gmail.com'] 
         Alert.alert(

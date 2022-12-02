@@ -1,3 +1,4 @@
+//Importacion de react y los componentes para la pantalla
 import React, { useState, useEffect } from 'react';
 import {
     View,
@@ -12,11 +13,10 @@ import {
     Alert,
     Pressable,
 } from 'react-native';
-import firebase from '../../database/firebase';
-import Options from '../Options/Options';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Principal = (props) =>{
+
+    //Declaracion de variables y sus estados y valores
     const [plantas, setPlantas] = useState([]);
     const url = 'http://dtai.uteq.edu.mx/~critre192/Apis/Plantas';
     const [modalVisible, setModalVisible] = useState(false);
@@ -27,8 +27,12 @@ const Principal = (props) =>{
     const [clima, setClima] = useState("");
     const [descripcion, setDescripcion] = useState("");
 
+    //Funcion para mostrar la ventana modal
     function verModal(){
+
+        //Si el estado de modalVisible es true mostrara la ventana modal
         if(modalVisible){
+            //Regresara este codigo si la condicion se cumple
             return(
                 <Modal
                     animationType='slide'
@@ -67,6 +71,7 @@ const Principal = (props) =>{
         }
     }
     
+        //Funcion para usar la API sacando los datos y guardandolos en un array
         useEffect(() => {
             fetch(url)
             .then(response => response.json())
@@ -75,27 +80,15 @@ const Principal = (props) =>{
 
     return(
         <ScrollView>
-        <Text style={{
-            backgroundColor:'#FF3434',
-            marginTop:5, 
-            marginBottom: 5,
-            borderColor: '#FF3434',
-            borderWidth:2,
-            borderRadius:20,
-            marginHorizontal: 100,
-            textAlign: 'center',
-            fontSize: 15}}
-            onPress={() => {props.navigation.navigate(Options);
-                }}
-        > Opciones </Text>
                     <View style={styles.container}>
                         <Image source={require('../../../assets/plantasfondo.jpg')} style={styles.imageStyl}  />
                         <Text style={styles.userStyle}>Aqui encontraras informacion sobre todas las plantas</Text>
                     </View>
                     <View style={{marginBottom:20}}>
                         {
+                            //Mapeamos los datos que sacamos de la API y les damos un diseño
                             Object.values(plantas).map((val) =>
-                            <View style={styles.container2}>
+                            <View key={val.id} style={styles.container2}>
                             <Image source={{uri: val.imagen_url}} style={styles.imageStyl2}/>
                             <Text style={styles.userStyle2}>{val.nombre}</Text>
                             <Text>{val.nombre_cientifico}</Text>

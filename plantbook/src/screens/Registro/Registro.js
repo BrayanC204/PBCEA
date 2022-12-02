@@ -1,3 +1,4 @@
+//Importacion de react y los componentes que usaremos en esta pantalla
 import React, { Component } from 'react';
 import {
     View,
@@ -9,10 +10,12 @@ import {
     ActivityIndicator,
     StyleSheet
 } from 'react-native';
+//Importacion del archivo de conexion a la base de datos
 import firebase from '../../database/firebase';
 
 export default class Registro extends Component {
 
+    //Creacion de un constructor para los estados
     constructor(props) {
         super(props);
 
@@ -33,20 +36,27 @@ export default class Registro extends Component {
     }
 
     render() {
+        //Funcion para validar el registro y registrar al usuario en firebase
         const validaRegistro = async () => {
+
+            //Variable para la validacion de sintaxis del correo
             let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 
+            //Modificamos el estado del boton para que se oculte mientras se validan los datos
             this.setState({
 				aiVisible: true,
 				btnVisible: false,
 			});
             
+            //Validacion de campos vacios
             if((this.state.name.length < 1) ||
             (this.state.surname.length < 1) ||
             (this.state.surname2.length < 1) ||
             (this.state.email.length < 1) ||
             (this.state.password.length < 1) ||
             (this.state.confirmPass.length < 1)) {
+
+                //Alerta si no se rellena algun campo
                 Alert.alert('ERROR', 'Rellene todos los campos',
                 [
                     {
@@ -60,92 +70,102 @@ export default class Registro extends Component {
                         }
                     }
                 ])
-            }
-
-            if (!emailRegex.test(this.state.email)) {
-                Alert.alert('ERROR','Correo Invalido', [
-                    {
-                        text: 'Corregir',
-                        onPress: () => {
-                            this.setState({
-                                email: '',
-                                aiVisible: false,
-                                btnVisible: true,
-                            });
-                            return;
-                        }
-                    },
-                ]);
-            }
-
-            if (!(this.state.password === this.state.confirmPass)){
-                Alert.alert('ERROR','Contraseñas diferentes', [
-                    {
-                        text: 'Corregir',
-                        onPress: () => {
-                            this.setState({
-                                password: '',
-                                confirmPass: '',
-                                aiVisible: false,
-                                btnVisible: true,
-                            });
-                            return;
-                        }
-                    },
-                ]);
-            }
-
-            try {
-                const usuarioFirebase = await firebase.auth.createUserWithEmailAndPassword(
-                    this.state.email,
-                    this.state.password,
-                );
-                if (usuarioFirebase) {
-                    const addusu = await firebase.db.collection('USUARIOS').add({
-                        id : usuarioFirebase.user.uid,
-                        name : this.state.name,
-                        surname : this.state.surname,
-                        surname2 : this.state.surname2,
-                        email : this.state.email,
-                        user_type : "usuario",
-                    });
-                    Alert.alert(
-                        'Registro Exitoso',
-                        `Gracias por Registrarte ${this.state.name}\n Tu ID:\n${addusu.id}`,
-                        [
+            } else{
+                //Si el email no tiene la sintaxis de un email mandara una alerta
+                if (!emailRegex.test(this.state.email)) {
+                    //Envia una alerta si no cumple la condicion
+                    Alert.alert('ERROR','Correo Invalido', [
+                        {
+                            text: 'Corregir',
+                            onPress: () => {
+                                this.setState({
+                                    email: '',
+                                    aiVisible: false,
+                                    btnVisible: true,
+                                });
+                                return;
+                            }
+                        },
+                    ]);
+                } else {
+                    //Si la confirmacion de la contraseña y la contraseña no son la misma marcara error
+                    if (!(this.state.password === this.state.confirmPass)){
+                        //Manda una alerta si no se cumple la condicion
+                        Alert.alert('ERROR','Contraseñas diferentes', [
                             {
-                                text: 'Continuar',
+                                text: 'Corregir',
+                                onPress: () => {
+                                    this.setState({
+                                        password: '',
+                                        confirmPass: '',
+                                        aiVisible: false,
+                                        btnVisible: true,
+                                    });
+                                    return;
+                                }
+                            },
+                        ]);
+                    }
+        
+                    //creamos la peticion para registrar el usuario
+                    try {
+                        //primero lo registramos el servicio de autenticacion de firebase
+                        const usuarioFirebase = await firebase.auth.createUserWithEmailAndPassword(
+                            this.state.email,
+                            this.state.password,
+                        );
+                        //si se registra con exito al servicio de firebase creamos otra peticion
+                        if (usuarioFirebase) {
+                            //Creamos una peticion para registrarlo en la base de datos donde guardaremos sus datos
+                            //para posibles mejoras de la aplicacion
+                            const addusu = await firebase.db.collection('USUARIOS').add({
+                                id : usuarioFirebase.user.uid,
+                                name : this.state.name,
+                                surname : this.state.surname,
+                                surname2 : this.state.surname2,
+                                email : this.state.email,
+                                user_type : "usuario",
+                            });
+                            //Si funciona mandaremos una alerta con su nombre y su ID
+                            Alert.alert(
+                                'Registro Exitoso',
+                                `Gracias por Registrarte ${this.state.name}\n Tu ID:\n${addusu.id}`,
+                                [
+                                    {
+                                        text: 'Continuar',
+                                        onPress: () => {
+                                            this.setState({
+                                                aiVisible: false,
+                                                btnVisible: true,
+                                                name: '',
+                                                surname: '',
+                                                surname2: '',
+                                                email: '',
+                                                password: '',
+                                                confirmPass: '',
+                                            });
+                                        },
+                                    },
+                                ],
+                            );
+                        }
+                    }catch (e) { //Si falla mandaremos una alerta de error
+                        Alert.alert('ERROR', e.toString(), [
+                            {
+                                text: 'Aceptar',
                                 onPress: () => {
                                     this.setState({
                                         aiVisible: false,
                                         btnVisible: true,
-                                        name: '',
-                                        surname: '',
-                                        surname2: '',
-                                        email: '',
-                                        password: '',
-                                        confirmPass: '',
                                     });
                                 },
                             },
                         ],
-                    );
+                        { cancelable: false });
+                    }
                 }
-            }catch (e) {
-                Alert.alert('ERROR', e.toString(), [
-                    {
-                        text: 'Aceptar',
-                        onPress: () => {
-                            this.setState({
-                                aiVisible: false,
-                                btnVisible: true,
-                            });
-                        },
-                    },
-                ],
-                { cancelable: false });
             }
-        }
+            }
 
     return(
         <View>

@@ -1,3 +1,4 @@
+//Importacion de react y los componentes para la pantalla
 import React, { useState } from 'react';
 import {
     View,
@@ -6,10 +7,11 @@ import {
     Image,
     StyleSheet,
 } from 'react-native';
-import Contacto from '../Contactanos/Contactanos';
+//Importacion de las librerias y las pantallas que necesitamos
 import Login from '../Login/Login';
 import email from 'react-native-email'; 
 
+//Creacion de la funcion para redirigir al proveedor de correo
 handleEmail = () => {
     const to = ['plantbook@gmail.com', 'plantbook@gmail.com'] 
     email(to, {

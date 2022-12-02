@@ -1,3 +1,4 @@
+//Importacion de las librerias y componentes que se usan en esta pantalla
 import React, { useState } from 'react';
 import {
     View,
@@ -9,11 +10,13 @@ import {
     Alert,
     StyleSheet
 } from 'react-native';
+//Importacion de el archivo de conexion a base de datos
 import firebase from '../../database/firebase';
 import getError from '../../helpers/errores_es_mx';
-import LoginStyles from './Login.forms';
+//Importacion de libreria para el uso del email
 import email from 'react-native-email'; 
 
+//Creacion de la funcion para enviar al usuario a su proveedor de correo electronico
 handleEmail = () => {
     const to = ['plantbook@gmail.com', 'plantbook@gmail.com'] 
     email(to, {
@@ -27,14 +30,17 @@ handleEmail = () => {
 
 const Login = (props) =>{
 
+    //Declaracion de las variables y estados
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [btnVisible, setBtnVisible] = useState(true);
 
     const validaLogin = async () => {
 
+        //Variable de validacion para el campo de email
         let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 
+        //Validacion de campos vacios
         if (email.length < 1 || password.length < 1) {
             Alert.alert('ERROR','Campos vacios', [
                 {
@@ -45,6 +51,7 @@ const Login = (props) =>{
             return;
         }
 
+        //Validacion de la sintaxis del correo electronico
         if (!emailRegex.test(email)) {
             Alert.alert('ERROR','Correo Invalido', [
                 {
@@ -55,14 +62,18 @@ const Login = (props) =>{
             return;
         }
         
+        //Ocultamos el boton de iniciar sesion para evitar errores
         setBtnVisible(false);
         
+        //Intentamos hacer la autenticacion con Firebase
         try {
+            //Usamos los valores de correo y contraseña para loguear al usuario con firebase
             const userFirebase = await firebase.auth.signInWithEmailAndPassword(
                 email,
                 password
             );
 
+            //Mostramos una alerta de que todo salio correctamente
             Alert.alert(
                 'Bienvenido',
                 `${userFirebase.user.email}`,
@@ -78,7 +89,7 @@ const Login = (props) =>{
                     },
                 ]
             );
-        } catch (e) {
+        } catch (e) { //Si no funciona tomamos el error y mostramos que fallo
             Alert.alert('ERROR', getError(e.code), [
                 {
                     text: 'Volver a intentar',
